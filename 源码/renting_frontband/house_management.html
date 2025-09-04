@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>房屋租赁管理系统</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+            margin: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">房屋租赁管理系统</div>
+                <nav>
+                    <ul>
+                        <li><a href="#dashboard">仪表盘</a></li>
+                        <li><a href="#houses">房屋管理</a></li>
+                        <li><a href="#payments">支付记录</a></li>
+                        <li><a href="#users">用户管理</a></li>
+                        <li><a href="#notices">通知公告</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="dashboard">
+            <h2 class="section-title">仪表盘</h2>
+            <div class="dashboard">
+                <div class="card">
+                    <h3>可租用房屋</h3>
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">套</div>
+                </div>
+                <div class="card">
+                    <h3>已占用房屋</h3>
+                    <div class="stat-number">24</div>
+                    <div class="stat-label">套</div>
+                </div>
+                <div class="card">
+                    <h3>维修中房屋</h3>
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">套</div>
+                </div>
+                <div class="card">
+                    <h3>本月收入</h3>
+                    <div class="stat-number">¥85,600</div>
+                    <div class="stat-label">元</div>
+                </div>
+            </div>
+            
+            <div class="chart-grid">
+                <div class="chart-container">
+                    <h3>房屋状态分布</h3>
+                    <canvas id="houseStatusChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>月度收入趋势</h3>
+                    <canvas id="incomeChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>支付状态统计</h3>
+                    <canvas id="paymentStatusChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>用户类型分布</h3>
+                    <canvas id="userTypeChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="houses">
+            <h2 class="section-title">房屋管理</h2>
+            <button class="btn btn-primary" onclick="openModal('houseModal')">添加房屋</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>房屋编号</th>
+                        <th>地址</th>
+                        <th>详情</th>
+                        <th>价格</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>H001</td>
+                        <td>北京市朝阳区某某街道1号</td>
+                        <td>两室一厅，精装修</td>
+                        <td>¥3,500/月</td>
+                        <td><span class="status available">可租用</span></td>
+                        <td>
+                            <button class="btn btn-primary">编辑</button>
+                            <button class="btn btn-warning">查看详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>H002</td>
+                        <td>北京市朝阳区某某街道2号</td>
+                        <td>一室一厅，简装修</td>
+                        <td>¥2,500/月</td>
+                        <td><span class="status occupied">已占用</span></td>
+                        <td>
+                            <button class="btn btn-primary">编辑</button>
+                            <button class="btn btn-warning">查看详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>H003</td>
+                        <td>北京市朝阳区某某街道3号</td>
+                        <td>三室两厅，豪华装修</td>
+                        <td>¥5,500/月</td>
+                        <td><span class="status maintenance">维修中</span></td>
+                        <td>
+                            <button class="btn btn-primary">编辑</button>
+                            <button class="btn btn-warning">查看详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="payments">
+            <h2 class="section-title">支付记录</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>房屋编号</th>
+                        <th>用户</th>
+                        <th>金额</th>
+                        <th>日期</th>
+                        <th>支付方式</th>
+                        <th>状态</th>
+                        <th>备注</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>H002</td>
+                        <td>李四</td>
+                        <td>¥2,500</td>
+                        <td>2023-08-01</td>
+                        <td>银行转账</td>
+                        <td><span class="status unpaid">未支付</span></td>
+                        <td>8月租金</td>
+                    </tr>
+                    <tr>
+                        <td>H002</td>
+                        <td>李四</td>
+                        <td>¥2,500</td>
+                        <td>2023-07-01</td>
+                        <td>银行转账</td>
+                        <td><span class="status paid">已支付</span></td>
+                        <td>7月租金</td>
+                    </tr>
+                    <tr>
+                        <td>H005</td>
+                        <td>王五</td>
+                        <td>¥3,000</td>
+                        <td>2023-07-02</td>
+                        <td>现金</td>
+                        <td><span class="status paid">已支付</span></td>
+                        <td>7月租金</td>
+                    </tr>
+                    <tr>
+                        <td>H002</td>
+                        <td>李四</td>
+                        <td>¥2,500</td>
+                        <td>2023-06-01</td>
+                        <td>银行转账</td>
+                        <td><span class="status paid">已支付</span></td>
+                        <td>6月租金</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="users">
+            <h2 class="section-title">用户管理</h2>
+            <button class="btn btn-primary" onclick="openModal('userModal')">添加用户</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>电话</th>
+                        <th>状态</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>张三</td>
+                        <td>13800000001</td>
+                        <td>管理员</td>
+                        <td>2023-01-15</td>
+                        <td>
+                            <button class="btn btn-primary">编辑</button>
+                            <button class="btn btn-warning">查看详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>李四</td>
+                        <td>13800000002</td>
+                        <td>用户</td>
+                        <td>2023-02-20</td>
+                        <td>
+                            <button class="btn btn-primary">编辑</button>
+                            <button class="btn btn-warning">查看详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>王五</td>
+                        <td>13800000003</td>
+                        <td>用户</td>
+                        <td>2023-03-10</td>
+                        <td>
+                            <button class="btn btn-primary">编辑</button>
+                            <button class="btn btn-warning">查看详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="notices">
+            <h2 class="section-title">通知公告</h2>
+            <button class="btn btn-primary" onclick="openModal('noticeModal')">发布公告</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>标题</th>
+                        <th>发布时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>租金调整通知</td>
+                        <td>2023-06-01 09:00</td>
+                        <td>
+                            <button class="btn btn-primary">编辑</button>
+                            <button class="btn btn-warning">查看详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>维修通知</td>
+                        <td>2023-06-02 14:30</td>
+                        <td>
+                            <button class="btn btn-primary">编辑</button>
+                            <button class="btn btn-warning">查看详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>安全检查通知</td>
+                        <td>2023-06-03 10:15</td>
+                        <td>
+                            <button class="btn btn-primary">编辑</button>
+                            <button class="btn btn-warning">查看详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <!-- 添加房屋模态框 -->
+    <div id="houseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>添加房屋</h3>
+                <button class="close" onclick="closeModal('houseModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="houseNumber">房屋编号</label>
+                    <input type="text" id="houseNumber" class="form-control" placeholder="请输入房屋编号">
+                </div>
+                <div class="form-group">
+                    <label for="houseAddress">地址</label>
+                    <input type="text" id="houseAddress" class="form-control" placeholder="请输入房屋地址">
+                </div>
+                <div class="form-group">
+                    <label for="houseDetail">详情</label>
+                    <input type="text" id="houseDetail" class="form-control" placeholder="请输入房屋详情">
+                </div>
+                <div class="form-group">
+                    <label for="housePrice">价格</label>
+                    <input type="number" id="housePrice" class="form-control" placeholder="请输入月租金">
+                </div>
+                <div class="form-group">
+                    <label for="houseStatus">状态</label>
+                    <select id="houseStatus" class="form-control">
+                        <option value="available">可租用</option>
+                        <option value="occupied">已占用</option>
+                        <option value="maintenance">维修中</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeModal('houseModal')">取消</button>
+                <button class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加用户模态框 -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>添加用户</h3>
+                <button class="close" onclick="closeModal('userModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="userName">用户名</label>
+                    <input type="text" id="userName" class="form-control" placeholder="请输入用户名">
+                </div>
+                <div class="form-group">
+                    <label for="userPhone">电话</label>
+                    <input type="text" id="userPhone" class="form-control" placeholder="请输入电话号码">
+                </div>
+                <div class="form-group">
+                    <label for="userPassword">密码</label>
+                    <input type="password" id="userPassword" class="form-control" placeholder="请输入密码">
+                </div>
+                <div class="form-group">
+                    <label for="userStatus">状态</label>
+                    <select id="userStatus" class="form-control">
+                        <option value="管理员">管理员</option>
+                        <option value="用户">用户</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeModal('userModal')">取消</button>
+                <button class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 发布公告模态框 -->
+    <div id="noticeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>发布公告</h3>
+                <button class="close" onclick="closeModal('noticeModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="noticeTitle">标题</label>
+                    <input type="text" id="noticeTitle" class="form-control" placeholder="请输入公告标题">
+                </div>
+                <div class="form-group">
+                    <label for="noticeContent">内容</label>
+                    <textarea id="noticeContent" class="form-control" rows="5" placeholder="请输入公告内容"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeModal('noticeModal')">取消</button>
+                <button class="btn btn-primary">发布</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 房屋租赁管理系统. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 打开模态框
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        // 关闭模态框
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+        
+        // 初始化图表
+        document.addEventListener('DOMContentLoaded', function() {
+            // 房屋状态分布图
+            const houseStatusCtx = document.getElementById('houseStatusChart').getContext('2d');
+            const houseStatusChart = new Chart(houseStatusCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['可租用', '已占用', '维修中'],
+                    datasets: [{
+                        data: [12, 24, 3],
+                        backgroundColor: [
+                            '#28a745',
+                            '#dc3545',
+                            '#ffc107'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        }
+                    }
+                }
+            });
+            
+            // 月度收入趋势图
+            const incomeCtx = document.getElementById('incomeChart').getContext('2d');
+            const incomeChart = new Chart(incomeCtx, {
+                type: 'line',
+                data: {
+                    labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月'],
+                    datasets: [{
+                        label: '月度收入 (¥)',
+                        data: [75000, 78000, 82000, 79000, 83000, 85000, 87000, 85600],
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            // 支付状态统计图
+            const paymentStatusCtx = document.getElementById('paymentStatusChart').getContext('2d');
+            const paymentStatusChart = new Chart(paymentStatusCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['已支付', '未支付', '逾期'],
+                    datasets: [{
+                        label: '支付记录数量',
+                        data: [45, 8, 3],
+                        backgroundColor: [
+                            '#28a745',
+                            '#ffc107',
+                            '#dc3545'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            // 用户类型分布图
+            const userTypeCtx = document.getElementById('userTypeChart').getContext('2d');
+            const userTypeChart = new Chart(userTypeCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['管理员', '普通用户'],
+                    datasets: [{
+                        data: [1, 24],
+                        backgroundColor: [
+                            '#667eea',
+                            '#28a745'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
