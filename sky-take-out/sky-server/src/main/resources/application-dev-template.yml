@@ -5,7 +5,11 @@ sky:
     port: 3306
     database: sky_take_out
     username: root
+<<<<<<< HEAD
     password: root
+=======
+    password: 123456
+>>>>>>> fa207713eb5075be3659e1f3e3bf93b9d9dc8291
   alioss:
     endpoint: oss-cn-hangzhou.aliyuncs.com
     access-key-id: your-access-key-id-here
@@ -14,7 +18,11 @@ sky:
   redis:
     host: 192.168.8.128
     port: 6379
+<<<<<<< HEAD
     password: root
+=======
+    password:
+>>>>>>> fa207713eb5075be3659e1f3e3bf93b9d9dc8291
     database: 10
   wechat:
     appid: your-wechat-appid-here

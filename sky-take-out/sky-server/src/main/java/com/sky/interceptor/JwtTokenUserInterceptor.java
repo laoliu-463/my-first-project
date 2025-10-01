@@ -11,9 +11,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+<<<<<<< HEAD
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.Map;
+=======
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+>>>>>>> fa207713eb5075be3659e1f3e3bf93b9d9dc8291
 
 /**
  * jwt令牌校验的拦截器
@@ -49,12 +55,18 @@ public class JwtTokenUserInterceptor implements HandlerInterceptor {
             log.info("jwt校验:{}", token);
             Claims claims = JwtUtil.parseJWT(jwtProperties.getUserSecretKey(), token);
             Long userId = Long.valueOf(claims.get(JwtClaimsConstant.USER_ID).toString());
+<<<<<<< HEAD
             log.info("当前用户id：{}", userId);
             
             //将当前用户id存入ThreadLocal中
             BaseContext.setCurrentId(userId);
             
             //3、通过校验，放行
+=======
+            log.info("当前用户的id：", userId);
+            BaseContext.setCurrentId(userId);
+            //3、通过，放行
+>>>>>>> fa207713eb5075be3659e1f3e3bf93b9d9dc8291
             return true;
         } catch (Exception ex) {
             //4、不通过，响应401状态码

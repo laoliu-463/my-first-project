@@ -2,7 +2,10 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+<<<<<<< HEAD
       <profile default="true" name="Default" enabled="true" />
+=======
+>>>>>>> fa207713eb5075be3659e1f3e3bf93b9d9dc8291
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -24,7 +27,10 @@
       <module name="sky-common" options="-parameters" />
       <module name="sky-pojo" options="-parameters" />
       <module name="sky-server" options="-parameters" />
+<<<<<<< HEAD
       <module name="sky-take-out" options="" />
+=======
+>>>>>>> fa207713eb5075be3659e1f3e3bf93b9d9dc8291
     </option>
   </component>
 </project>

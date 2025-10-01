@@ -5,7 +5,11 @@ import com.sky.vo.SalesTop10ReportVO;
 import com.sky.vo.TurnoverReportVO;
 import com.sky.vo.UserReportVO;
 
+<<<<<<< HEAD
 import jakarta.servlet.http.HttpServletResponse;
+=======
+import javax.servlet.http.HttpServletResponse;
+>>>>>>> fa207713eb5075be3659e1f3e3bf93b9d9dc8291
 import java.time.LocalDate;
 
 public interface ReportService {
@@ -46,4 +50,8 @@ public interface ReportService {
      * @param response
      **/
     void exportBusinessData(HttpServletResponse response);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> fa207713eb5075be3659e1f3e3bf93b9d9dc8291

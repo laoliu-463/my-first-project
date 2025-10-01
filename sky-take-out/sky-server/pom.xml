@@ -43,7 +43,10 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+<<<<<<< HEAD
             <version>8.0.33</version>
+=======
+>>>>>>> fa207713eb5075be3659e1f3e3bf93b9d9dc8291
             <scope>runtime</scope>
         </dependency>
 
@@ -127,4 +130,8 @@
         </plugins>
     </build>
 
+<<<<<<< HEAD
 </project>
+=======
+</project>
+>>>>>>> fa207713eb5075be3659e1f3e3bf93b9d9dc8291

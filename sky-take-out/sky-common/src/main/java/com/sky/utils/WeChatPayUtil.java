@@ -232,6 +232,7 @@ public class WeChatPayUtil {
         //调用申请退款接口
         return post(REFUNDS, body);
     }
+<<<<<<< HEAD
     
     /**
      * 解析微信支付回调数据
@@ -246,3 +247,6 @@ public class WeChatPayUtil {
         return body;
     }
 }
+=======
+}
+>>>>>>> fa207713eb5075be3659e1f3e3bf93b9d9dc8291
