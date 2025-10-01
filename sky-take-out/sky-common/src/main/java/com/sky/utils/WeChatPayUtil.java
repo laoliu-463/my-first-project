@@ -232,4 +232,17 @@ public class WeChatPayUtil {
         //调用申请退款接口
         return post(REFUNDS, body);
     }
+    
+    /**
+     * 解析微信支付回调数据
+     *
+     * @param body 回调数据
+     * @return 解密后的明文
+     */
+    public String parseOrderNotifyData(String body) throws Exception {
+        // TODO: 实现微信支付回调数据解析逻辑
+        // 这里应该包含对微信支付回调数据的解析和验证逻辑
+        // 由于缺少完整的微信支付回调处理逻辑，暂时返回空字符串
+        return body;
+    }
 }

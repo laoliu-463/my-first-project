@@ -60,10 +60,10 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private WeChatPayUtil weChatPayUtil;
 
-    @Value("${sky.shop.address}")
+    @Value("${shop.address}")
     private String shopAddress;
 
-    @Value("${sky.baidu.ak}")
+    @Value("${baidu.ak}")
     private String ak;
 
     @Autowired

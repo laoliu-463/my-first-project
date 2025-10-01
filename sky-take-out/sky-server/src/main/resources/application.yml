@@ -2,28 +2,25 @@ server:
   port: 8080
 
 spring:
-  profiles:
-    active: dev
   main:
     allow-circular-references: true
   datasource:
-    druid:
-      driver-class-name: ${sky.datasource.driver-class-name}
-      url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-      username: ${sky.datasource.username}
-      password: ${sky.datasource.password}
-  redis:
-    host: ${sky.redis.host}
-    port: ${sky.redis.port}
-    password: ${sky.redis.password}
-    database: ${sky.redis.database}
+    url: jdbc:mysql://localhost:3306/sky_take_out?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 
+      database: 10
 
 mybatis:
-  #mapper配置文件
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.sky.entity
   configuration:
-    #开启驼峰命名
     map-underscore-to-camel-case: true
 
 logging:
@@ -36,31 +33,32 @@ logging:
 
 sky:
   jwt:
-    # 设置jwt签名加密时使用的秘钥
     admin-secret-key: itcast
-    # 设置jwt过期时间
     admin-ttl: 7200000
-    # 设置前端传递过来的令牌名称
     admin-token-name: token
     user-secret-key: itheima
     user-ttl: 7200000
     user-token-name: authentication
-  alioss:
-    endpoint: ${sky.alioss.endpoint}
-    access-key-id: ${sky.alioss.access-key-id}
-    access-key-secret: ${sky.alioss.access-key-secret}
-    bucket-name: ${sky.alioss.bucket-name}
-  wechat:
-    appid: ${sky.wechat.appid}
-    secret: ${sky.wechat.secret}
-    mchid: ${sky.wechat.mchid}
-    mchSerialNo: ${sky.wechat.mchSerialNo}
-    privateKeyFilePath: ${sky.wechat.privateKeyFilePath}
-    apiV3Key: ${sky.wechat.apiV3Key}
-    weChatPayCertFilePath: ${sky.wechat.weChatPayCertFilePath}
-    notifyUrl: ${sky.wechat.notifyUrl}
-    refundNotifyUrl: ${sky.wechat.refundNotifyUrl}
-  shop:
-    address: 湖北省武汉市洪山区徐东大街18号
-  baidu:
-    ak: EFEEFFEFEFE
+
+alioss:
+  endpoint: oss-cn-hangzhou.aliyuncs.com
+  access-key-id: your-access-key-id-here
+  access-key-secret: your-access-key-secret-here
+  bucket-name: sky-take-out
+
+wechat:
+  appid: your-wechat-appid-here
+  secret: your-wechat-secret-here
+  mchid: your-wechat-mchid-here
+  mchSerialNo: your-wechat-mchSerialNo-here
+  privateKeyFilePath: D:/apiclient_key.pem
+  apiV3Key: your-wechat-apiV3Key-here
+  weChatPayCertFilePath: D:/wechatpay_166D96F876F45C7D07CE98952A96EC980368ACFC.pem
+  notifyUrl: https://www.weixin.qq.com/wxpay/pay.php
+  refundNotifyUrl: https://www.weixin.qq.com/wxpay/pay.php
+
+shop:
+  address: 湖北省武汉市洪山区徐东大街18号
+
+baidu:
+  ak: EFEEFFEFEFE
