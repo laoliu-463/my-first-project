@@ -1,0 +1,30 @@
+# Maven target directory
+target/
+**/target/
+
+# IntelliJ IDEA files
+*.iml
+*.iws
+*.ipr
+out/
+.idea/
+.idea/.gitignore
+/shelf/
+/workspace.xml
+/httpRequests/
+/mavenHomeManager.xml
+/dataSources/
+/dataSources.local.xml
+
+# Compiled class file
+*.class
+
+# Test files - 注意：我们不应该忽略所有Test.java文件，这样会忽略掉重要的测试代码
+# */test/  # 这行可能会忽略有用的测试代码，请根据实际需求决定是否保留
+
+# Log files
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
